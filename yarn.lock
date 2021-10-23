@@ -156,10 +156,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^14.11.2":
-  version: 14.17.28
-  resolution: "@types/node@npm:14.17.28"
-  checksum: 84af4d39adb08756205ab77773dac6d796fe04c129fe554510e94f9a60c3599047a43fe499778d51a56258a14aa8afd0e8545dc658bfcaf67362e2e2028fb2fd
+"@types/node@npm:^16.11.4":
+  version: 16.11.4
+  resolution: "@types/node@npm:16.11.4"
+  checksum: 96e08c0f8bb17601c18640a8eac61e2f236fe0c8a6b01a9221c10749157358fb29fdef4b5e264f72559e72f9830e6093f3ab5fef2df90afdad562ffa45ac534c
   languageName: node
   linkType: hard
 
@@ -761,9 +761,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "docker-mysql@workspace:."
   dependencies:
-    "@types/node": ^14.11.2
+    "@types/node": ^16.11.4
     sijiaoh-gts: ^0.5.4
-    typescript: ^4.0.3
+    typescript: ^4.4.4
   languageName: unknown
   linkType: soft
 
@@ -3134,7 +3134,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-typescript@^4.0.3:
+typescript@^4.4.4:
   version: 4.4.4
   resolution: "typescript@npm:4.4.4"
   bin:
@@ -3144,7 +3144,7 @@ typescript@^4.0.3:
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@^4.0.3#~builtin<compat/typescript>":
+"typescript@patch:typescript@^4.4.4#~builtin<compat/typescript>":
   version: 4.4.4
   resolution: "typescript@patch:typescript@npm%3A4.4.4#~builtin<compat/typescript>::version=4.4.4&hash=32657b"
   bin:
