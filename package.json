@@ -1,12 +1,24 @@
 {
-  "name": "docker-mysql",
+  "name": "@sijiaoh/docker-mysql",
+  "version": "0.0.0",
   "packageManager": "yarn@3.0.2",
+  "keywords": [
+    "docker",
+    "mysql",
+    "sijiaoh"
+  ],
+  "author": "sijiaoh",
+  "license": "MIT",
+  "files": [
+    "build"
+  ],
+  "bin": "build/src/index",
   "scripts": {
     "lint": "gts lint",
     "clean": "gts clean",
     "build": "tsc --project tsconfig.build.json",
     "fix": "gts fix",
-    "prepublish": "yarn run build"
+    "prepublish": "yarn clean && yarn run build"
   },
   "dependencies": {
     "commander": "^8.3.0",

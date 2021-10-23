@@ -103,6 +103,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@sijiaoh/docker-mysql@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "@sijiaoh/docker-mysql@workspace:."
+  dependencies:
+    "@types/node": ^16.11.4
+    commander: ^8.3.0
+    execa: ^5.1.1
+    sijiaoh-gts: ^0.5.4
+    typescript: ^4.4.4
+  bin:
+    docker-mysql: build/src/index
+  languageName: unknown
+  linkType: soft
+
 "@sindresorhus/is@npm:^0.14.0":
   version: 0.14.0
   resolution: "@sindresorhus/is@npm:0.14.0"
@@ -763,18 +777,6 @@ __metadata:
   checksum: fa05e18324510d7283f55862f3161c6759a3f2f8dbce491a2fc14c8324c498286c54282c1f0e933cb930da8419b30679389499b919122952a4f8592362ef4615
   languageName: node
   linkType: hard
-
-"docker-mysql@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "docker-mysql@workspace:."
-  dependencies:
-    "@types/node": ^16.11.4
-    commander: ^8.3.0
-    execa: ^5.1.1
-    sijiaoh-gts: ^0.5.4
-    typescript: ^4.4.4
-  languageName: unknown
-  linkType: soft
 
 "doctrine@npm:^2.1.0":
   version: 2.1.0
