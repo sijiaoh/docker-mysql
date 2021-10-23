@@ -12,7 +12,9 @@
   "files": [
     "build"
   ],
-  "bin": "build/src/index",
+  "bin": {
+    "docker-mysql": "build/src/index.js"
+  },
   "scripts": {
     "lint": "gts lint",
     "clean": "gts clean",
