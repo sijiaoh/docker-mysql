@@ -29,8 +29,14 @@ const execMysql = async (
   options?: execa.Options & {userName?: string; password?: string}
 ) => {
   const newOptions = {...options};
-  const userName = newOptions?.userName || 'root';
-  const password = newOptions?.password || mysqlRootPassword;
+
+  let userName = newOptions?.userName;
+  let password = newOptions?.password;
+  if (userName == null && password == null) {
+    userName = 'root';
+    password = mysqlRootPassword;
+  }
+
   delete newOptions.userName;
   delete newOptions.password;
   await exec(
