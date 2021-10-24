@@ -26,19 +26,25 @@ const exec = async (
 const execMysql = async (
   mysqlVersion: string,
   command: string,
-  options?: execa.Options & {userName?: string; password?: string}
+  options?: execa.Options & {
+    userName?: string;
+    password?: string;
+    database?: string;
+  }
 ) => {
   const newOptions = {...options};
 
-  let userName = newOptions?.userName;
-  let password = newOptions?.password;
+  let userName = options?.userName;
+  let password = options?.password;
   if (userName == null && password == null) {
     userName = 'root';
     password = mysqlRootPassword;
   }
+  const database = options?.database;
 
   delete newOptions.userName;
   delete newOptions.password;
+  delete newOptions.database;
   await exec(
     'docker',
     [
@@ -47,6 +53,7 @@ const execMysql = async (
       'mysql',
       `--user=${userName}`,
       `--password=${password}`,
+      database || '',
       '-e',
       command,
     ],
@@ -169,11 +176,12 @@ program
   .command('exec <mysqlVersion> <command>')
   .option('-u --userName <userName>')
   .option('-p --password <password>')
+  .option('-d --database <database>')
   .action(
     async (
       mysqlVersion: string,
       command: string,
-      options: {userName?: string; password?: string}
+      options: {userName?: string; password?: string; database?: string}
     ) => {
       await execMysql(mysqlVersion, command, {stdio: 'inherit', ...options});
     }
