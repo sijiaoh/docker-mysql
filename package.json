@@ -1,6 +1,6 @@
 {
   "name": "@sijiaoh/docker-mysql",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "packageManager": "yarn@3.0.2",
   "keywords": [
     "docker",
@@ -12,9 +12,7 @@
   "files": [
     "build"
   ],
-  "bin": {
-    "docker-mysql": "build/src/index.js"
-  },
+  "bin": "build/src/index.js",
   "scripts": {
     "lint": "gts lint",
     "clean": "gts clean",
