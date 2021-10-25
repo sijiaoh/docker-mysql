@@ -49,10 +49,11 @@ const execMysql = async (
     'docker',
     [
       'exec',
+      '--env',
+      `MYSQL_PWD=${password}`,
       getContainerName(mysqlVersion),
       'mysql',
       `--user=${userName}`,
-      `--password=${password}`,
       database || '',
       '-e',
       command,
