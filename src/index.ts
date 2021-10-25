@@ -29,7 +29,7 @@ const execMysql = async (
   options?: execa.Options & {
     userName?: string;
     password?: string;
-    database?: string;
+    databaseName?: string;
   }
 ) => {
   const newOptions = {...options};
@@ -40,11 +40,11 @@ const execMysql = async (
     userName = 'root';
     password = mysqlRootPassword;
   }
-  const database = options?.database;
+  const database = options?.databaseName;
 
   delete newOptions.userName;
   delete newOptions.password;
-  delete newOptions.database;
+  delete newOptions.databaseName;
   await exec(
     'docker',
     [
@@ -155,18 +155,23 @@ const up = async (mysqlVersion: string) => {
 };
 
 program
-  .command('prepare <mysqlVersion> <databaseName> <userName> <password>')
+  .command('prepare <mysqlVersion> <databaseName>')
+  .option('-u --userName <userName>')
+  .option('-p --password <password>')
   .action(
     async (
       mysqlVersion: string,
       databaseName: string,
-      userName: string,
-      password: string
+      {userName, password}: {userName?: string; password?: string}
     ) => {
       await up(mysqlVersion);
       await createDatabase(mysqlVersion, databaseName);
-      await createUser(mysqlVersion, userName, password);
-      await grantDatabaseToUser(mysqlVersion, userName, databaseName);
+
+      const userCreated = userName && password;
+      if (userCreated) await createUser(mysqlVersion, userName, password);
+      if (userCreated)
+        await grantDatabaseToUser(mysqlVersion, userName, databaseName);
+
       console.info(
         'Success: mysql is running on port ' + getPort(mysqlVersion)
       );
@@ -174,17 +179,20 @@ program
   );
 
 program
-  .command('exec <mysqlVersion> <command>')
+  .command('exec <mysqlVersion> <command...>')
+  .option('-d --databaseName <databaseName>')
   .option('-u --userName <userName>')
   .option('-p --password <password>')
-  .option('-d --database <database>')
   .action(
     async (
       mysqlVersion: string,
-      command: string,
-      options: {userName?: string; password?: string; database?: string}
+      command: string[],
+      options: {userName?: string; password?: string; databaseName?: string}
     ) => {
-      await execMysql(mysqlVersion, command, {stdio: 'inherit', ...options});
+      await execMysql(mysqlVersion, command.join(' '), {
+        stdio: 'inherit',
+        ...options,
+      });
     }
   );
 
